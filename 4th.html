@@ -1,0 +1,103 @@
+<html>
+
+<head>
+
+<style>
+
+#leftside
+{
+	position:absolute;
+	width:500px; height:500px;
+}
+#rightside
+{
+	width:500px; height:500px;
+	position:absolute;
+	left: 700px;
+	border-left: 1px solid black;
+}
+</style>
+
+</head>
+
+<body onload="generateFaces()">
+<h1> MATCHING GAME </h1>
+<p> Click on extra smiling face on the left </p>
+<div id="leftside"></div>
+<div id="rightside"></div>
+<script>
+
+
+
+var no_of_faces=5;
+
+var theLeftSide =document.getElementById("leftside");
+var theRightSide= document.getElementById("rightside");
+var y,z,x;
+var body1 = document.getElementsByTagName("body")[0];
+function generateFaces()
+{
+	console.log(no_of_faces);
+	while(no_of_faces!=0)
+	{
+		var x=document.createElement("IMG");
+		x.setAttribute("src","smile.png");
+		x.setAttribute("height",100);
+		x.style.position = 'absolute';
+		//x.style.top="200px";
+		x.style.left=Math.floor((Math.random() * 400) + 1);
+		x.style.top=Math.floor((Math.random() * 400) + 1);
+		theLeftSide.appendChild(x);
+		no_of_faces=no_of_faces-1;
+	}
+ y=theLeftSide.cloneNode(true);
+ //x=y.lastChild;
+ y.removeChild(y.lastChild);
+ theRightSide.appendChild(y);
+
+
+//console.log("Asa");
+ document.body.onclick = function gameOver() 
+  {
+  	//console.log("Asa");
+
+
+      alert("Game Over!");
+      body1.onclick = null;
+
+    theLeftSide.lastChild.onclick = null;
+
+
+  }
+console.log(theLeftSide.lastChild);
+theLeftSide.lastChild.onclick=function(event)
+ {
+ 	
+	//console.log("Asa");
+         event.stopPropagation();
+
+         no_of_faces=no_of_faces+5;
+//console.log(no_of_faces);
+         
+        /* while(theLeftSide.firstChild)
+         {
+         	theLeftSide.removeChild(theLeftSide.firstChild);
+         }
+          while(theRightSide.firstChild)
+         {
+         	theRightSide.removeChild(theRightSide.firstChild);
+         }
+         */
+         
+
+         generateFaces();
+ }
+ 
+
+}
+</script>
+
+</body>
+
+</html>
+
